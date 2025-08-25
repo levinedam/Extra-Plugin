@@ -1,4 +1,3 @@
-''''
 import logging
 import traceback
 from functools import wraps
@@ -326,4 +325,3 @@ def extract_urls(reply_markup):
                     )
                     urls.append((f"{name}", button.text, button.url))
 
-''''

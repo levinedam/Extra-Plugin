@@ -5,20 +5,20 @@ from re import findall
 from config import BANNED_USERS
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from YukkiMusic import app
-from YukkiMusic.utils.database import (
+from damMusic import app
+from damMusic.utils.database import (
     delete_note,
     deleteall_notes,
     get_note,
     get_note_names,
     save_note,
 )
-from YukkiMusic.utils.functions import (
+from damMusic.utils.functions import (
     check_format,
     extract_text_and_keyb,
     get_data_and_name,
 )
-from YukkiMusic.utils.keyboard import ikb
+from damMusic.utils.keyboard import ikb
 
 
 def extract_urls(reply_markup):
@@ -54,7 +54,7 @@ async def save_notee(_, message):
         if len(message.command) < 2:
             await eor(
                 message,
-                text="**Usage:**\nReply to a message with /save [NOTE_NAME] to save a new note.",
+                text="<blockquote>**Usage:**\nReply to a message with /save [NOTE_NAME] to save a new note.</blockquote>",
             )
         else:
             replied_message = message.reply_to_message
@@ -63,7 +63,7 @@ async def save_notee(_, message):
             data, name = await get_data_and_name(replied_message, message)
             if data == "error":
                 return await message.reply_text(
-                    "**Usage:**\n__/save [NOTE_NAME] [CONTENT]__\n`-----------OR-----------`\nReply to a message with.\n/save [NOTE_NAME]"
+                    "<blockquote>**Usage:**\n__/save [NOTE_NAME] [CONTENT]__\n`-----------OR-----------`\nReply to a message with.\n/save [NOTE_NAME]</blockquote>"
                 )
             if replied_message.text:
                 _type = "text"
@@ -103,7 +103,7 @@ async def save_notee(_, message):
                 data = await check_format(ikb, data)
                 if not data:
                     return await message.reply_text(
-                        "**Wrong formatting, check the help section.**"
+                        "<blockquote>**Wrong formatting, check the help section.**</blockquote>"
                     )
             note = {
                 "type": _type,
@@ -115,7 +115,7 @@ async def save_notee(_, message):
             await eor(message, text=f"__**Saved note {name}.**__")
     except UnboundLocalError:
         return await message.reply_text(
-            "**Replied message is inaccessible.\n`Forward the message and try again`**"
+            "<blockquote>**Replied message is inaccessible.\n`Forward the message and try again`**</blockquote>"
         )
 
 
@@ -127,7 +127,7 @@ async def get_notes(_, message):
     _notes = await get_note_names(chat_id)
 
     if not _notes:
-        return await eor(message, text="**No notes in this chat.**")
+        return await eor(message, text="<blockquote>**No notes in this chat.**</blockquote>")
     _notes.sort()
     msg = f"List of notes in {message.chat.title}\n"
     for note in _notes:
@@ -341,7 +341,7 @@ async def del_note(_, message):
 async def delete_all(_, message):
     _notes = await get_note_names(message.chat.id)
     if not _notes:
-        return await message.reply_text("**No notes in this chat.**")
+        return await message.reply_text("<blockquote>**No notes in this chat.**</blockquote>")
     else:
         keyboard = InlineKeyboardMarkup(
             [
@@ -352,7 +352,7 @@ async def delete_all(_, message):
             ]
         )
         await message.reply_text(
-            "**Are you sure you want to delete all the notes in this chat forever ?.**",
+            "<blockquote>**Are you sure you want to delete all the notes in this chat forever ?.**</blockquote>",
             reply_markup=keyboard,
         )
 
@@ -373,7 +373,7 @@ async def delete_all_cb(_, cb):
         stoped_all = await deleteall_notes(chat_id)
         if stoped_all:
             return await cb.message.edit(
-                "**Successfully deleted all notes on this chat.**"
+                "<blockquote>**Successfully deleted all notes on this chat.**</blockquote>"
             )
     if input == "no":
         await cb.message.reply_to_message.delete()
@@ -382,11 +382,11 @@ async def delete_all_cb(_, cb):
 
 __MODULE__ = "Nᴏᴛᴇs"
 __HELP__ = """
-**ɴᴏᴛᴇꜱ:**
+<blockquote expandable>**ɴᴏᴛᴇꜱ:**
 
 • `/save [NOTE_NAME] [CONTENT]`: Sᴀᴠᴇs ᴀ ɴᴏᴛᴇ ᴡɪᴛʜ ᴛʜᴇ ɢɪᴠᴇɴ ɴᴀᴍᴇ ᴀɴᴅ ᴄᴏɴᴛᴇɴᴛ.
 • `/notes`: Sʜᴏᴡs ᴀʟʟ sᴀᴠᴇᴅ ɴᴏᴛᴇꜱ ɪɴ ᴛʜᴇ ᴄʜᴀᴛ.
 • `/get [NOTE_NAME]`: Gᴇᴛs ᴛʜᴇ ᴄᴏɴᴛᴇɴᴛ ᴏғ ᴀ sᴀᴠᴇᴅ ɴᴏᴛᴇ.
 • `/delete [NOTE_NAME]`: Dᴇʟᴇᴛᴇs ᴀ sᴀᴠᴇᴅ ɴᴏᴛᴇ.
-• `/deleteall`: Dᴇʟᴇᴛᴇs ᴀʟʟ sᴀᴠᴇᴅ ɴᴏᴛᴇꜱ ɪɴ ᴛʜᴇ ᴄʜᴀᴛ.
+• `/deleteall`: Dᴇʟᴇᴛᴇs ᴀʟʟ sᴀᴠᴇᴅ ɴᴏᴛᴇꜱ ɪɴ ᴛʜᴇ ᴄʜᴀᴛ.</blockquote>
 """

@@ -3,8 +3,8 @@ from typing import Union
 from pyrogram import filters
 from pyrogram.enums import ChatMembersFilter
 from pyrogram.types import Message
-from YukkiMusic import app
-from YukkiMusic.core.mongo import mongodb
+from damMusic import app
+from damMusic.core.mongo import mongodb
 
 impdb = mongodb.impdb
 
@@ -78,20 +78,20 @@ async def chk_usr(_, message: Message):
         and lastname_before != message.from_user.last_name
     ):
         changes.append(
-            f"ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ɴᴀᴍᴇ ғʀᴏᴍ {first_name} {lastname_before} ᴛᴏ {message.from_user.first_name} {message.from_user.last_name}\n"
+            f"<blockquote>ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ɴᴀᴍᴇ ғʀᴏᴍ {first_name} {lastname_before} ᴛᴏ {message.from_user.first_name} {message.from_user.last_name}\n</blockquote>"
         )
     elif first_name != message.from_user.first_name:
         changes.append(
-            f"ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ғɪʀsᴛ ɴᴀᴍᴇ ғʀᴏᴍ {first_name} ᴛᴏ {message.from_user.first_name}\n"
+            f"<blockquote>ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ғɪʀsᴛ ɴᴀᴍᴇ ғʀᴏᴍ {first_name} ᴛᴏ {message.from_user.first_name}\n</blockquote>"
         )
     elif lastname_before != message.from_user.last_name:
         changes.append(
-            f"ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ʟᴀsᴛ ɴᴀᴍᴇ ғʀᴏᴍ {lastname_before} ᴛᴏ {message.from_user.last_name}\n"
+            f"<blockquote>ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ʟᴀsᴛ ɴᴀᴍᴇ ғʀᴏᴍ {lastname_before} ᴛᴏ {message.from_user.last_name}\n</blockquote>"
         )
 
     if usernamebefore != message.from_user.username:
         changes.append(
-            f"ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ᴜsᴇʀɴᴀᴍᴇ ғʀᴏᴍ @{usernamebefore} ᴛᴏ @{message.from_user.username}\n"
+            f"<blockquote>ᴄʜᴀɴɢᴇᴅ ʜᴇʀ ᴜsᴇʀɴᴀᴍᴇ ғʀᴏᴍ @{usernamebefore} ᴛᴏ @{message.from_user.username}\n</blockquote>"
         )
 
     if changes:
@@ -120,34 +120,34 @@ async def set_mataa(_, message: Message):
     if message.from_user.id not in admin_ids:
         return
     if len(message.command) == 1:
-        return await message.reply("**ᴅᴇᴛᴇᴄᴛᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴀɢᴇ:\n/pretender on|off**")
+        return await message.reply("<blockquote>**ᴅᴇᴛᴇᴄᴛᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴀɢᴇ:\n/pretender on|off**</blockquote>")
     chat_id = message.chat.id
     if message.command[1] == "on":
         cekset = await check_pretender(chat_id)
         if cekset:
             await message.reply(
-                f"ᴘʀᴇᴛᴇɴᴅᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ ғᴏʀ **{message.chat.title}**"
+                f"<blockquote>ᴘʀᴇᴛᴇɴᴅᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ ғᴏʀ **{message.chat.title}**</blockquote>"
             )
         else:
             await impo_on(chat_id)
             await message.reply(
-                f"sᴜᴄᴇssғᴜʟʟʏ ᴇɴᴀʙʟᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ғᴏʀ **{message.chat.title}**"
+                f"<blockquote>sᴜᴄᴇssғᴜʟʟʏ ᴇɴᴀʙʟᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ғᴏʀ **{message.chat.title}**</blockquote>"
             )
     elif message.command[1] == "off":
         cekset = await check_pretender(chat_id)
         if not cekset:
             await message.reply(
-                f"ᴘʀᴇᴛᴇɴᴅᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ ғᴏʀ **{message.chat.title}**"
+                f"<blockquote>ᴘʀᴇᴛᴇɴᴅᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ ғᴏʀ **{message.chat.title}**</blockquote>"
             )
         else:
             await impo_off(chat_id)
             await message.reply(
-                f"sᴜᴄᴇssғᴜʟʟʏ ᴅɪsᴀʙʟᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ғᴏʀ **{message.chat.title}"
+                f"<blockquote>sᴜᴄᴇssғᴜʟʟʏ ᴅɪsᴀʙʟᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ғᴏʀ **{message.chat.title}</blockquote>"
             )
     else:
-        await message.reply("**ᴅᴇᴛᴇᴄᴛᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴀɢᴇ:\n/pretender on|off**")
+        await message.reply("<blockquote>**ᴅᴇᴛᴇᴄᴛᴇᴅ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴀɢᴇ:\n/pretender on|off**</blockquote>")
 
 
 __MODULE__ = "Pʀᴇᴛᴇɴᴅᴇʀ"
 __HELP__ = """
-/pretender - [Oɴ / ᴏғғ]  - ᴛᴏ ᴛᴜʀɴ ᴏɴ ᴏʀ ᴏғғ ᴘʀᴇᴛᴇɴᴅᴇʀ ғᴏʀ ʏᴏᴜ ᴄʜᴀᴛ ɪғ ᴀɴʏ ᴜsᴇʀ ᴄʜᴀɴɢᴇ ʜᴇʀ ᴜsᴇʀɴᴀᴍᴇ, ɴᴀᴍᴇ , ʙɪᴏ ʙᴏᴛ ᴡɪʟʟ sᴇɴᴅ ᴍᴇssᴀɢᴇ ɪɴ ʏᴏᴜʀ ᴄʜᴀᴛ"""
+<blockquote>/pretender - [Oɴ / ᴏғғ]  - ᴛᴏ ᴛᴜʀɴ ᴏɴ ᴏʀ ᴏғғ ᴘʀᴇᴛᴇɴᴅᴇʀ ғᴏʀ ʏᴏᴜ ᴄʜᴀᴛ ɪғ ᴀɴʏ ᴜsᴇʀ ᴄʜᴀɴɢᴇ ʜᴇʀ ᴜsᴇʀɴᴀᴍᴇ, ɴᴀᴍᴇ , ʙɪᴏ ʙᴏᴛ ᴡɪʟʟ sᴇɴᴅ ᴍᴇssᴀɢᴇ ɪɴ ʏᴏᴜʀ ᴄʜᴀᴛ</blockquote>"""

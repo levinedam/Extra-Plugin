@@ -1,19 +1,19 @@
 from googlesearch import search
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command(["google", "gle"]))
 async def google(bot, message):
     if len(message.command) < 2 and not message.reply_to_message:
-        await message.reply_text("Example:\n\n`/google lord ram`")
+        await message.reply_text("<blockquote>Example:\n\n`/google lord ram`</blockquote>")
         return
 
     if message.reply_to_message and message.reply_to_message.text:
         user_input = message.reply_to_message.text
     else:
         user_input = " ".join(message.command[1:])
-    b = await message.reply_text("**Sᴇᴀʀᴄʜɪɴɢ ᴏɴ Gᴏᴏɢʟᴇ....**")
+    b = await message.reply_text("<blockquote>**Sᴇᴀʀᴄʜɪɴɢ ᴏɴ Gᴏᴏɢʟᴇ....**</blockquote>")
     try:
         a = search(user_input, advanced=True)
         txt = f"Search Query: {user_input}\n\nresults"
@@ -28,4 +28,4 @@ async def google(bot, message):
 
 
 __MODULE__ = "Gᴏᴏɢʟᴇ"
-__HELP__ = """/google [ǫᴜᴇʀʏ] - ᴛᴏ sᴇᴀʀᴄʜ ᴏɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ɢᴇᴛ ʀᴇsᴜʟᴛs"""
+__HELP__ = """<blockquote>/google [ǫᴜᴇʀʏ] - ᴛᴏ sᴇᴀʀᴄʜ ᴏɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ɢᴇᴛ ʀᴇsᴜʟᴛs</blockquote>"""

@@ -1,5 +1,5 @@
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command("hastag"))
@@ -9,14 +9,14 @@ async def hastag(bot, message):
         text = message.text.split(" ", 1)[1]
         res = await utils.TheApi.gen_hashtag(text)
     except IndexError:
-        return await message.reply_text("Example:\n\n/hastag python")
+        return await message.reply_text("<blockquote>Example:\n\n/hastag python</blockquote>")
 
-    await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ  ʜᴀsᴛᴀɢ :\n<pre>{res}</pre>", quote=True)
+    await message.reply_text(f"<blockquote>ʜᴇʀᴇ ɪs ʏᴏᴜʀ  ʜᴀsᴛᴀɢ :\n<pre>{res}</pre></blockquote>", quote=True)
 
 
 __MODULE__ = "Hᴀsʜᴛᴀɢ"
 __HELP__ = """
-**ʜᴀsʜᴛᴀɢ ɢᴇɴᴇʀᴀᴛᴏʀ:**
+<blockquote>**ʜᴀsʜᴛᴀɢ ɢᴇɴᴇʀᴀᴛᴏʀ:**
 
-• `/hashtag [text]`: Gᴇɴᴇʀᴀᴛᴇ ʜᴀsʜᴛᴀɢs ғᴏʀ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ.
+• `/hashtag [text]`: Gᴇɴᴇʀᴀᴛᴇ ʜᴀsʜᴛᴀɢs ғᴏʀ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ.</blockquote>
 """

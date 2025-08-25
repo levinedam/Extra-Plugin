@@ -8,7 +8,7 @@ from pyrogram.types import (
     InputMediaPhoto,
     Message,
 )
-from YukkiMusic import app
+from damMusic import app
 
 close_keyboard = InlineKeyboardMarkup(
     [
@@ -29,7 +29,7 @@ async def dog(c, m: Message):
         else:
             await m.reply_photo(dog_url, reply_markup=close_keyboard)
     else:
-        await m.reply_text("Failed to fetch dog picture 🐕")
+        await m.reply_text("<blockquote>Failed to fetch dog picture 🐕</blockquote>")
 
 
 @app.on_callback_query(filters.regex("refresh_dog") & ~BANNED_USERS)
@@ -46,4 +46,4 @@ async def refresh_dog(c, m: CallbackQuery):
                 reply_markup=close_keyboard,
             )
     else:
-        await m.edit_message_text("Failed to refresh dog picture 🐕")
+        await m.edit_message_text("<blockquote>Failed to refresh dog picture 🐕</blockquote>")

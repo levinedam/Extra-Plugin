@@ -1,9 +1,9 @@
 from pyrogram import filters
 from pyrogram.enums import ChatType
 from strings import get_string
-from YukkiMusic import app
-from YukkiMusic.utils import Yukkibin
-from YukkiMusic.utils.database import get_assistant, get_lang
+from damMusic import app
+from damMusic.utils import damdambin
+from damMusic.utils.database import get_assistant, get_lang
 
 
 @app.on_message(

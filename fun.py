@@ -1,7 +1,7 @@
 import requests
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(
@@ -30,22 +30,22 @@ async def dice(c, m: Message):
     elif command == "/dart":
 
         value = await c.send_dice(m.chat.id, emoji="🎯", reply_to_message_id=m.id)
-        await value.reply_text(f"ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}")
+        await value.reply_text(f"<blockquote>ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}</blockquote>")
 
     elif command == "/basket" or command == "/basketball":
         basket = await c.send_dice(m.chat.id, emoji="🏀", reply_to_message_id=m.id)
-        await basket.reply_text(f"ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {basket.dice.value}")
+        await basket.reply_text(f"<blockquote>ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {basket.dice.value}</blockquote>")
 
     elif command == "/football":
         value = await c.send_dice(m.chat.id, emoji="⚽", reply_to_message_id=m.id)
-        await value.reply_text(f"ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}")
+        await value.reply_text(f"<blockquote>ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}</blockquote>")
 
     elif command == "/slot" or command == "/jackpot":
         value = await c.send_dice(m.chat.id, emoji="🎰", reply_to_message_id=m.id)
-        await value.reply_text(f"ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}")
+        await value.reply_text(f"<blockquote>ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}</blockquote>")
     elif command == "/bowling":
         value = await c.send_dice(m.chat.id, emoji="🎳", reply_to_message_id=m.id)
-        await value.reply_text(f"ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}")
+        await value.reply_text(f"<blockquote>ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {value.dice.value}</blockquote>")
 
 
 bored_api_url = "https://apis.scrimba.com/bored/api/activity"
@@ -58,11 +58,11 @@ async def bored_command(client, message):
         data = response.json()
         activity = data.get("activity")
         if activity:
-            await message.reply(f"𝗙𝗲𝗲𝗹𝗶𝗻𝗴 𝗯𝗼𝗿𝗲𝗱? 𝗛𝗼𝘄 𝗮𝗯𝗼𝘂𝘁:\n\n {activity}")
+            await message.reply(f"<blockquote>𝗙𝗲𝗲𝗹𝗶𝗻𝗴 𝗯𝗼𝗿𝗲𝗱? 𝗛𝗼𝘄 𝗮𝗯𝗼𝘂𝘁:\n\n {activity}</blockquote>")
         else:
-            await message.reply("Nᴏ ᴀᴄᴛɪᴠɪᴛʏ ғᴏᴜɴᴅ.")
+            await message.reply("<blockquote>Nᴏ ᴀᴄᴛɪᴠɪᴛʏ ғᴏᴜɴᴅ.</blockquote>")
     else:
-        await message.reply("Fᴀɪʟᴇᴅ ᴛᴏ ғᴇᴛᴄʜ ᴀᴄᴛɪᴠɪᴛʏ.")
+        await message.reply("<blockquote>Fᴀɪʟᴇᴅ ᴛᴏ ғᴇᴛᴄʜ ᴀᴄᴛɪᴠɪᴛʏ.</blockquote>")
 
 
 @app.on_callback_query(filters.regex(r"send_dice"))
@@ -81,7 +81,7 @@ async def dice_again(client, query):
 
 __MODULE__ = "Fᴜɴ"
 __HELP__ = """
-**ʜᴀᴠɪɴɢ ꜰᴜɴ:**
+<blockquote expandable>**ʜᴀᴠɪɴɢ ꜰᴜɴ:**
 
 • `/dice`: Rᴏʟʟs ᴀ ᴅɪᴄᴇ.
 • `/ludo`: Pʟᴀʏ Lᴜᴅᴏ.
@@ -90,5 +90,5 @@ __HELP__ = """
 • `/football`: Pʟᴀʏs ғᴏᴏᴛʙᴀʟʟ.
 • `/slot` ᴏʀ `/jackpot`: Pʟᴀʏs ᴊᴀᴄᴋᴘᴏᴛ.
 • `/bowling`: Pʟᴀʏs ʙᴏᴡʟɪɴɢ.
-• `/bored`: Gᴇᴛs ʀᴀɴᴅᴏᴍ ᴀᴄᴛɪᴠɪᴛʏ ɪғ ʏᴏᴜ'ʀᴇ ʙᴏʀᴇᴅ.
+• `/bored`: Gᴇᴛs ʀᴀɴᴅᴏᴍ ᴀᴄᴛɪᴠɪᴛʏ ɪғ ʏᴏᴜ'ʀᴇ ʙᴏʀᴇᴅ.</blockquote>
 """

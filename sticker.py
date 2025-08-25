@@ -1,8 +1,11 @@
+import imghdr
 import math
 import os
+import asyncio
 from asyncio import gather
+from traceback import format_exc
+from typing import List
 
-import filetype
 from PIL import Image
 from pyrogram import Client, errors, filters, raw
 from pyrogram.errors import (
@@ -15,14 +18,17 @@ from pyrogram.errors import (
 )
 from pyrogram.file_id import FileId
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+import pyrogram
+from uuid import uuid4
 from damMusic import app
+from utils.error import capture_err
 
 BOT_USERNAME = app.username
 
 MAX_STICKERS = (
     120  # would be better if we could fetch this limit directly from telegram
 )
-SUPPORTED_TYPES = ["jpeg", "png", "webp", "jpg"]
+SUPPORTED_TYPES = ["jpeg", "png", "webp"]
 STICKER_DIMENSIONS = (512, 512)
 
 
@@ -51,7 +57,7 @@ async def create_sticker_set(
     owner: int,
     title: str,
     short_name: str,
-    stickers: list[raw.base.InputStickerSetItem],
+    stickers: List[raw.base.InputStickerSetItem],
 ) -> raw.base.messages.StickerSet:
     return await client.invoke(
         raw.functions.stickers.CreateStickerSet(
@@ -147,31 +153,31 @@ async def get_document_from_file_id(
 
 
 @app.on_message(filters.command("stickerid"))
-@utils.capture_err
+@capture_err
 async def sticker_id(_, message: Message):
     reply = message.reply_to_message
 
     if not reply:
-        return await message.reply("Reply to a sticker.")
+        return await message.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ.")
 
     if not reply.sticker:
-        return await message.reply("Reply to a sticker.")
+        return await message.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ.")
 
     await message.reply_text(f"`{reply.sticker.file_id}`")
 
 
 @app.on_message(filters.command("getsticker"))
-@utils.capture_err
+@capture_err
 async def sticker_image(_, message: Message):
     r = message.reply_to_message
 
     if not r:
-        return await message.reply("Reply to a sticker.")
+        return await message.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ.")
 
     if not r.sticker:
-        return await message.reply("Reply to a sticker.")
+        return await message.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ.")
 
-    m = await message.reply("Sending..")
+    m = await message.reply("sᴇɴᴅɪɴɢ..")
     f = await r.download(f"{r.sticker.file_unique_id}.png")
 
     await gather(
@@ -186,13 +192,13 @@ async def sticker_image(_, message: Message):
 
 
 @app.on_message(filters.command("kang"))
-@utils.capture_err
+@capture_err
 async def kang(client, message: Message):
     if not message.reply_to_message:
-        return await message.reply_text("Reply to a sticker/image to kang it.")
+        return await message.reply_text("ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ/image to kang it.")
     if not message.from_user:
-        return await message.reply_text("You are anon admin, kang stickers in my pm.")
-    msg = await message.reply_text("Kanging Sticker..")
+        return await message.reply_text("ʏᴏᴜ ᴀʀᴇ ᴀɴᴏɴ ᴀᴅᴍɪɴ, ᴋᴀɴɢ sᴛɪᴄᴋᴇʀs ɪɴ ᴍʏ ᴘᴍ.")
+    msg = await message.reply_text("ᴋᴀɴɢɪɴɢ sᴛɪᴄᴋᴇʀ..")
 
     # Find the proper emoji
     args = message.text.split()
@@ -215,21 +221,18 @@ async def kang(client, message: Message):
             )
         elif doc:
             if doc.file_size > 10000000:
-                return await msg.edit("File size too large.")
+                return await msg.edit("ғɪʟᴇ sɪᴢᴇ ᴛᴏᴏ ʟᴀʀɢᴇ.")
 
             temp_file_path = await app.download_media(doc)
-            # Using filetype to detect the file type
-            image_type = filetype.guess(temp_file_path)
-            if not image_type or image_type.extension not in SUPPORTED_TYPES:
-                return await msg.edit(
-                    f"Format not supported! ({image_type.extension if image_type else 'unknown'})"
-                )
+            image_type = imghdr.what(temp_file_path)
+            if image_type not in SUPPORTED_TYPES:
+                return await msg.edit("ғᴏʀᴍᴀᴛ ɴᴏᴛ sᴜᴘᴘᴏʀᴛᴇᴅ! ({})".format(image_type))
             try:
                 temp_file_path = await resize_file_to_sticker_size(temp_file_path)
             except OSError as e:
-                await msg.edit_text("Something wrong happened.")
+                await msg.edit_text("sᴏᴍᴇᴛʜɪɴɢ ᴡʀᴏɴɢ ʜᴀᴘᴘᴇɴᴇᴅ.")
                 raise Exception(
-                    f"Something went wrong while resizing the sticker (at {temp_file_path}); {e}"
+                    f"sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ ᴡʜɪʟᴇ ʀᴇsɪᴢɪɴɢ ᴛʜᴇ sᴛɪᴄᴋᴇʀ (ᴀᴛ {temp_file_path}); {e}"
                 )
             sticker = await create_sticker(
                 await upload_document(client, temp_file_path, message.chat.id),
@@ -238,22 +241,25 @@ async def kang(client, message: Message):
             if os.path.isfile(temp_file_path):
                 os.remove(temp_file_path)
         else:
-            return await msg.edit("Nope, can't kang that.")
+            return await msg.edit("ɴᴏᴘᴇ, ᴄᴀɴ'ᴛ ᴋᴀɴɢ ᴛʜᴀᴛ.")
     except ShortnameOccupyFailed:
-        await message.reply_text("Change Your Name Or Username")
-        return
-    except Exception as e:
-        await message.reply_text(str(e))
+        await message.reply_text("ᴄʜᴀɴɢᴇ ʏᴏᴜʀ ɴᴀᴍᴇ ᴏʀ ᴜsᴇʀɴᴀᴍᴇ")
         return
 
-    # Find an available pack & add the sticker to the pack; create a new pack
-    # if needed
+    except Exception as e:
+        await message.reply_text(str(e))
+        e = format_exc()
+        return print(e)
+
+    # Find an available pack & add the sticker to the pack; create a new pack if needed
+    # Would be a good idea to cache the number instead of searching it every
+    # single time...
     packnum = 0
     packname = "f" + str(message.from_user.id) + "_by_" + BOT_USERNAME
     limit = 0
     try:
         while True:
-            # Prevent infinite loops
+            # Prevent infinite rules
             if limit >= 50:
                 return await msg.delete()
 
@@ -287,7 +293,7 @@ async def kang(client, message: Message):
             break
 
         await msg.edit(
-            "Sticker Kanged To [Pack](t.me/addstickers/{})\nEmoji: {}".format(
+            "sᴛɪᴄᴋᴇʀ ᴋᴀɴɢᴇᴅ ᴛᴏ [ᴘᴀᴄᴋ](t.me/addstickers/{})\nEmoji: {}".format(
                 packname, sticker_emoji
             )
         )
@@ -296,15 +302,113 @@ async def kang(client, message: Message):
             [[InlineKeyboardButton(text="Start", url=f"t.me/{BOT_USERNAME}")]]
         )
         await msg.edit(
-            "You Need To Start A Private Chat With Me.",
+            "ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ sᴛᴀʀᴛ ᴀ ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀᴛ ᴡɪᴛʜ ᴍᴇ.",
             reply_markup=keyboard,
         )
     except StickerPngNopng:
         await message.reply_text(
-            "Stickers must be png files but the provided image was not a png"
+            "sᴛɪᴄᴋᴇʀs ᴍᴜsᴛ ʙᴇ ᴘɴɢ ғɪʟᴇs ʙᴜᴛ ᴛʜᴇ ᴘʀᴏᴠɪᴅᴇᴅ ɪᴍᴀɢᴇ ᴡᴀs ɴᴏᴛ ᴀ ᴘɴɢ"
         )
     except StickerPngDimensions:
-        await message.reply_text("The sticker png dimensions are invalid.")
+        await message.reply_text("ᴛʜᴇ sᴛɪᴄᴋᴇʀ ᴘɴɢ ᴅɪᴍᴇɴsɪᴏɴs ᴀʀᴇ ɪɴᴠᴀʟɪᴅ.")
+
+@app.on_message(filters.command("st"))
+def generate_sticker(client, message):
+    if len(message.command) == 2:
+        sticker_id = message.command[1]
+        try:
+            client.send_sticker(message.chat.id, sticker=sticker_id)
+        except Exception as e:
+            message.reply_text(f"Error: {e}")
+    else:
+        message.reply_text("ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ sᴛɪᴄᴋᴇʀ ɪᴅ ᴀғᴛᴇʀ /st ᴄᴏᴍᴍᴀɴᴅ.")
+
+@app.on_message(filters.command("packkang"))
+async def _packkang(app, message):
+    txt = await message.reply_text("ᴘʀᴏᴄᴇssɪɴɢ....")
+
+    if not message.reply_to_message:
+        await txt.edit('ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ!')
+        return
+
+    if not message.reply_to_message.sticker:
+        await txt.edit('ʀᴇᴘʟʏ ᴛᴏ ᴀ sᴛɪᴄᴋᴇʀ!')
+        return
+
+    if len(message.command) < 2:
+        pack_name = f'{message.from_user.first_name}_sticker_pack_by_@{BOT_USERNAME}'
+    else:
+        pack_name = message.text.split(maxsplit=1)[1]
+
+    short_name = message.reply_to_message.sticker.set_name
+    try:
+        stickers = await app.invoke(
+            raw.functions.messages.GetStickerSet(
+                stickerset=raw.types.InputStickerSetShortName(short_name=short_name),
+                hash=0
+            )
+        )
+    except Exception as e:
+        await txt.edit(f"ᴇʀʀᴏʀ ғᴇᴛᴄʜɪɴɢ sᴛɪᴄᴋᴇʀ sᴇᴛ: {str(e)}")
+        return
+
+    documents = stickers.documents
+    if not documents:
+        await txt.edit("sᴛɪᴄᴋᴇʀ sᴇᴛ ɪs ᴇᴍᴘᴛʏ ᴏʀ ᴄᴏᴜʟᴅ ɴᴏᴛ ʙᴇ ғᴇᴛᴄʜᴇᴅ.")
+        return
+
+    sticks = []
+    for document in documents:
+        emoji = "🙂"
+        for attribute in document.attributes:
+            if isinstance(attribute, raw.types.DocumentAttributeSticker):
+                emoji = attribute.alt or "🙂"
+                break
+
+        input_document = raw.types.InputDocument(
+            id=document.id,
+            access_hash=document.access_hash,
+            file_reference=document.file_reference
+        )
+        sticks.append(
+            raw.types.InputStickerSetItem(
+                document=input_document,
+                emoji=emoji
+            )
+        )
+
+    short_name = f'sticker_pack_{str(uuid4()).replace("-", "")}_by_{app.me.username}'
+    user_id = await app.resolve_peer(message.from_user.id)
+
+    for attempt in range(3):
+        try:
+            await app.invoke(
+                raw.functions.stickers.CreateStickerSet(
+                    user_id=user_id,
+                    title=pack_name,
+                    short_name=short_name,
+                    stickers=sticks,
+                )
+            )
+            await txt.edit(
+                f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴋᴀɴɢᴇᴅ ʟɪɴᴋ!\nᴛᴏᴛᴀʟ sᴛɪᴄᴋᴇʀs: {len(sticks)}",
+                reply_markup=InlineKeyboardMarkup(
+                    [[InlineKeyboardButton("ᴘᴀᴄᴋ ʟɪɴᴋ", url=f"http://t.me/addstickers/{short_name}")]]
+                )
+            )
+            return
+        except Exception as e:
+            if "Timeout" in str(e):
+                if attempt < 2: 
+                    await txt.edit(f"ʀᴇᴛʀʏɪɴɢ... ({attempt + 1}/3)")
+                    await asyncio.sleep(5)
+                else:
+                    await txt.edit(f"ғᴀɪʟᴇᴅ ᴀғᴛᴇʀ 𝟹 ʀᴇᴛʀɪᴇs: {str(e)}")
+            elif "FLOOD_WAIT_X" in str(e):
+             await asyncio.sleep(e.value)
+            else:
+                await txt.edit(f"ᴇʀʀᴏʀ: {str(e)}")
+                return
 
 
 __MODULE__ = "Sᴛɪᴄᴋᴇʀ"

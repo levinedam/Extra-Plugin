@@ -1,8 +1,8 @@
 from pyrogram.enums import ChatType, ParseMode
 from pyrogram.filters import command
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from YukkiMusic import app
-from YukkiMusic.utils.functions import MARKDOWN
+from damMusic import app
+from damMusic.utils.functions import MARKDOWN
 
 
 @app.on_message(command("markdownhelp"))
@@ -19,7 +19,7 @@ async def mkdwnhelp(_, m: Message):
     )
     if m.chat.type != ChatType.PRIVATE:
         await m.reply(
-            "Click on the below button to get markdown usage syntax in pm!",
+            "<blockquote>Click on the below button to get markdown usage syntax in pm!</blockquote>",
             reply_markup=keyb,
         )
     else:

@@ -1,5 +1,5 @@
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command(["write"]))
@@ -10,9 +10,9 @@ async def write(client, message):
         txt = message.text.split(None, 1)[1]
     else:
         return await message.reply(
-            "Pʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴍᴇssᴀɢᴇ ᴏʀ ᴡʀɪᴛᴇ ᴀғᴛᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ᴜsᴇ ᴡʀɪᴛᴇ CMD"
+            "<blockquote>Pʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴍᴇssᴀɢᴇ ᴏʀ ᴡʀɪᴛᴇ ᴀғᴛᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ᴜsᴇ ᴡʀɪᴛᴇ CMD</blockquote>"
         )
-    nan = await message.reply_text("Pʀᴏᴄᴇssɪɴɢ...")
+    nan = await message.reply_text("<blockquote>Pʀᴏᴄᴇssɪɴɢ...</blockquote>")
     try:
         img = await utils.TheApi.write(txt)
         await message.reply_photo(img)
@@ -23,7 +23,7 @@ async def write(client, message):
 
 __MODULE__ = "Wʀɪᴛᴇ"
 __HELP__ = """
-**COMMANDS**:
+<blockquote expandable>**COMMANDS**:
 - /write: ᴡʀɪᴛᴇ ᴛᴇxᴛ ᴏɴ ᴀɴ ᴄʟᴏᴜᴅ ᴀɴᴅ ɢᴇᴛ ᴀɴ ᴇᴅɪᴛᴇᴅ ᴘʜᴏᴛᴏ.
 
 **INFO**:
@@ -33,4 +33,4 @@ __HELP__ = """
 - ᴘᴇʀᴍɪssɪᴏɴs ɴᴇᴇᴅᴇᴅ: ɴᴏɴᴇ
 
 **NOTE**:
-- ᴜsᴇ ᴅɪʀᴇᴄᴛʟʏ ɪɴ ᴀ ɢʀᴏᴜᴘ ᴄʜᴀᴛ ᴡɪᴛʜ ᴍᴇ ғᴏʀ ᴛʜᴇ ʙᴇsᴛ ʀᴇsᴜʟᴛs."""
+- ᴜsᴇ ᴅɪʀᴇᴄᴛʟʏ ɪɴ ᴀ ɢʀᴏᴜᴘ ᴄʜᴀᴛ ᴡɪᴛʜ ᴍᴇ ғᴏʀ ᴛʜᴇ ʙᴇsᴛ ʀᴇsᴜʟᴛs.</blockquote>"""

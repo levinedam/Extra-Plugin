@@ -2,7 +2,7 @@ from config import BANNED_USERS
 from g4f.client import AsyncClient
 from pyrogram import filters
 from pyrogram.enums import ParseMode
-from YukkiMusic import app
+from damMusic import app
 
 client = AsyncClient()
 
@@ -11,7 +11,7 @@ client = AsyncClient()
 async def chatgpt_chat(bot, message):
     if len(message.command) < 2 and not message.reply_to_message:
         await message.reply_text(
-            "Example:\n\n`/ai write simple website code using html css, js?`"
+            "<blockquote>Example:\n\n`/ai write simple website code using html css, js?`</blockquote>"
         )
         return
 
@@ -51,7 +51,7 @@ async def chatgpt_chat(bot, message):
 
 __MODULE__ = "CʜᴀᴛGᴘᴛ"
 __HELP__ = """
-/advice - ɢᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ ʙʏ ʙᴏᴛ
+<blockquote expandable>/advice - ɢᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ ʙʏ ʙᴏᴛ
 /ai [ǫᴜᴇʀʏ] - ᴀsᴋ ʏᴏᴜʀ ǫᴜᴇsᴛɪᴏɴ ᴡɪᴛʜ ᴄʜᴀᴛɢᴘᴛ's ᴀɪ
 /ai [ǫᴜᴇʀʏ] - ᴀsᴋ ʏᴏᴜʀ ǫᴜᴇsᴛɪᴏɴ ᴡɪᴛʜ ᴄʜᴀᴛɢᴘᴛ's ᴀɪ Gpt4
-/gemini [ǫᴜᴇʀʏ] - ᴀsᴋ ʏᴏᴜʀ ǫᴜᴇsᴛɪᴏɴ ᴡɪᴛʜ ɢᴏᴏɢʟᴇ's ɢᴇᴍɪɴɪ ᴀɪ"""
+/gemini [ǫᴜᴇʀʏ] - ᴀsᴋ ʏᴏᴜʀ ǫᴜᴇsᴛɪᴏɴ ᴡɪᴛʜ ɢᴏᴏɢʟᴇ's ɢᴇᴍɪɴɪ ᴀɪ</blockquote>"""

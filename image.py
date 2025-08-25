@@ -1,25 +1,25 @@
 from config import BANNED_USERS
 from pyrogram import filters
 from pyrogram.types import InputMediaPhoto
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command(["image"], prefixes=["/", "!", "."]) & ~BANNED_USERS)
 async def image_from_bing(_, message):
     if len(message.command) < 2 and not message.reply_to_message:
-        return await message.reply_text("**ɢɪᴠᴇ ɪᴍᴀɢᴇ ɴᴀᴍᴇ ғᴏʀ sᴇᴀʀᴄʜ 🔍**")
+        return await message.reply_text("<blockquote>**ɢɪᴠᴇ ɪᴍᴀɢᴇ ɴᴀᴍᴇ ғᴏʀ sᴇᴀʀᴄʜ 🔍**</blockquote>")
 
     if message.reply_to_message and message.reply_to_message.text:
         query = message.reply_to_message.text
     else:
         query = " ".join(message.command[1:])
 
-    messagesend = await message.reply_text("**🔍 sᴇᴀʀᴄʜɪɴɢ ғᴏʀ ɪᴍᴀɢᴇs...**")
+    messagesend = await message.reply_text("<blockquote>**🔍 sᴇᴀʀᴄʜɪɴɢ ғᴏʀ ɪᴍᴀɢᴇs...**</blockquote>")
 
     media_group = []
     for url in await utils.TheApi.bing_image(query, 6):
         media_group.append(InputMediaPhoto(media=url))
-    await messagesend.edit(f"**ᴜᴘʟᴏᴀᴅɪɴɢ...**")
+    await messagesend.edit(f"<blockquote>**ᴜᴘʟᴏᴀᴅɪɴɢ...**</blockquote>")
     try:
         await app.send_media_group(message.chat.id, media_group)
         await messagesend.delete()

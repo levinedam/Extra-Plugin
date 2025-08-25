@@ -9,7 +9,7 @@ from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
 )
-from YukkiMusic import app
+from damMusic import app
 
 
 def figle(text):
@@ -33,10 +33,10 @@ async def echo(bot, message):
     try:
         text = message.text.split(" ", 1)[1]
     except IndexError:
-        return await message.reply_text("Example:\n\n`/figlet Yukki `")
+        return await message.reply_text("<blockquote>Example:\n\n`/figlet Levine `</blockquote>")
     kul_text, keyboard = figle(text)
     await message.reply_text(
-        f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre>",
+        f"<blockquote>ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre></blockquote>",
         quote=True,
         reply_markup=keyboard,
     )
@@ -47,7 +47,7 @@ async def figlet_handler(Client, query: CallbackQuery):
     try:
         kul_text, keyboard = figle(text)
         await query.message.edit_text(
-            f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre>", reply_markup=keyboard
+            f"<blockquote>ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre></blockquote>", reply_markup=keyboard
         )
     except FloodWait as e:
         await asyncio.sleep(e.value)
@@ -58,7 +58,7 @@ async def figlet_handler(Client, query: CallbackQuery):
 
 __MODULE__ = "Fɪɢʟᴇᴛ"
 __HELP__ = """
-**ғɪɢʟᴇᴛ**
+<blockquote>**ғɪɢʟᴇᴛ**
 
-• /figlet <text> - ᴄʀᴇᴀᴛᴇs ᴀ ғɪɢʟᴇᴛ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ.
+• /figlet <text> - ᴄʀᴇᴀᴛᴇs ᴀ ғɪɢʟᴇᴛ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ.</blockquote>
 """

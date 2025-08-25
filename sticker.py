@@ -21,7 +21,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 import pyrogram
 from uuid import uuid4
 from damMusic import app
-from utils.error import capture_err
+from damMusic.utils.decorators import capture_err
 
 BOT_USERNAME = app.username
 

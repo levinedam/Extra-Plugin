@@ -1,7 +1,7 @@
 import requests
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from YukkiMusic import app
+from damMusic import app
 
 
 def get_pypi_info(package_name):
@@ -26,12 +26,12 @@ async def pypi_info_command(client, message):
 
         if pypi_info:
             info_message = (
-                f"ᴅᴇᴀʀ {message.from_user.mention} \n "
+                f"<blockquote expandable>ᴅᴇᴀʀ {message.from_user.mention} \n "
                 f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴘᴀᴋᴀɢᴇ ᴅᴇᴛᴀɪʟs \n\n "
                 f"ᴘᴀᴋᴀɢᴇ ɴᴀᴍᴇ ➪ {pypi_info['info']['name']}\n\n"
                 f"ʟᴀᴛᴇsᴛ ᴠᴇʀsɪᴏɴ ➪ {pypi_info['info']['version']}\n\n"
                 f"ᴅᴇsᴄʀɪᴘᴛɪᴏɴ ➪ {pypi_info['info']['summary']}\n\n"
-                f"ᴘʀᴏJᴇᴄᴛ ᴜʀʟ ➪ {pypi_info['info']['project_urls']['Homepage']}"
+                f"ᴘʀᴏJᴇᴄᴛ ᴜʀʟ ➪ {pypi_info['info']['project_urls']['Homepage']}</blockquote>"
             )
             close_markup = InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="〆 ᴄʟᴏsᴇ 〆", callback_data="close")]]
@@ -44,18 +44,18 @@ async def pypi_info_command(client, message):
 
     except IndexError:
         await message.reply_text(
-            "Please provide a package name after the /pypi command."
+            "<blockquote>Please provide a package name after the /pypi command.</blockquote>"
         )
 
 
 __MODULE__ = "Pʏᴘɪ"
 __HELP__ = """
-**ᴄᴏᴍᴍᴀɴᴅs:**
+<blockquote expandable>**ᴄᴏᴍᴍᴀɴᴅs:**
 • /pypi <package_name>`: Get details about a specified Python package from PyPI.
 
 **ɪɴғᴏ:**
 ᴛʜɪs ᴍᴏᴅᴜʟᴇ ᴀʟʟᴏᴡs ᴜsᴇʀs ᴛᴏ ғᴇᴛᴄʜ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴘʏᴛʜᴏɴ ᴘᴀᴄᴋᴀɢᴇs ғʀᴏᴍ ᴘʏᴘɪ, ɪɴᴄʟᴜᴅɪɴɢ ᴛʜᴇ ᴘᴀᴄᴋᴀɢᴇ ɴᴀᴍᴇ, ʟᴀᴛᴇsᴛ ᴠᴇʀsɪᴏɴ, ᴅᴇsᴄʀɪᴘᴛɪᴏɴ, ᴀɴᴅ ᴘʀᴏᴊᴇᴄᴛ ᴜʀʟ.
 
 **ɴᴏᴛᴇ:**
-ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ᴘᴀᴄᴋᴀɢᴇ ɴᴀᴍᴇ ᴀғᴛᴇʀ ᴛʜᴇ `/pypi` ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ʀᴇᴛʀɪᴇᴠᴇ ᴘᴀᴄᴋᴀɢᴇ ᴅᴇᴛᴀɪʟs.
+ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ᴘᴀᴄᴋᴀɢᴇ ɴᴀᴍᴇ ᴀғᴛᴇʀ ᴛʜᴇ `/pypi` ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ʀᴇᴛʀɪᴇᴠᴇ ᴘᴀᴄᴋᴀɢᴇ ᴅᴇᴛᴀɪʟs.</blockquote>
 """

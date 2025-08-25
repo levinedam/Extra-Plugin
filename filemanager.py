@@ -5,8 +5,8 @@ import time
 from os.path import exists, isdir
 
 from pyrogram import filters
-from YukkiMusic import app
-from YukkiMusic.misc import SUDOERS
+from damMusic import app
+from damMusic.misc import SUDOERS
 
 MAX_MESSAGE_SIZE_LIMIT = 4090
 
@@ -32,7 +32,7 @@ async def lst(_, message):
 
     if not exists(path):
         await message.reply(
-            text=f"There is no such directory or file with the name `{directory}`. Check again!",
+            text=f"<blockquote>There is no such directory or file with the name `{directory}`. Check again!</blockquote>",
         )
         return
 
@@ -106,11 +106,11 @@ async def lst(_, message):
             mode = "📄"
 
         msg = (
-            f"<b>Location:</b> {path}\n"
+            f"<blockquote><b>Location:</b> {path}\n"
             f"<b>Icon:</b> {mode}\n"
             f"<b>Size:</b> {humanbytes(size)}\n"
             f"<b>Last Modified:</b> {last_modified}\n"
-            f"<b>Last Accessed:</b> {last_accessed}\n"
+            f"<b>Last Accessed:</b> {last_accessed}\n</blockquote>"
         )
 
     if len(msg) > MAX_MESSAGE_SIZE_LIMIT:
@@ -126,7 +126,7 @@ async def lst(_, message):
 @utils.capture_err
 async def rm_files(_, message):
     if len(message.command) < 2:
-        return await message.reply("Please provide file(s) or directory(s) to delete.")
+        return await message.reply("<blockquote>Please provide file(s) or directory(s) to delete.</blockquote>")
 
     # Split into multiple file names
     files = message.text.split(" ", 1)[1].split()

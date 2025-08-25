@@ -35,7 +35,7 @@ async def cat(c, m: Message):
         else:
             await m.reply_photo(cat_url, caption="meow", reply_markup=buttons(cat_url))
     else:
-        await m.reply_text("Failed to fetch cat picture 🙀")
+        await m.reply_text("<blockquote>Failed to fetch cat picture 🙀</blockquote>")
 
 
 @app.on_callback_query(filters.regex("refresh_cat") & ~BANNED_USERS)
@@ -54,4 +54,4 @@ async def refresh_cat(c, m: CallbackQuery):
                 reply_markup=buttons(cat_url),
             )
     else:
-        await m.edit_message_text("Failed to refresh cat picture 🙀")
+        await m.edit_message_text("<blockquote>Failed to refresh cat picture 🙀</blockquote>")

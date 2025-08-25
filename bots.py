@@ -11,14 +11,14 @@ async def bots(client, message):
 
     total_bots = len(bot_list)
     if total_bots == 0:
-        await message.reply_text("There are no bots in this group.")
+        await message.reply_text("<blockquote>There are no bots in this group.</blockquote>")
         return
 
     header = f"**🤖 Bot List in {message.chat.title}**\n\n"
     bot_lines = "\n".join(
         [f"{i + 1}. @{bot.username}" for i, bot in enumerate(bot_list)]
     )
-    footer = f"\n\n**Total Number of Bots:** {total_bots}"
+    footer = f"<blockquote>\n\n**Total Number of Bots:** {total_bots}</blockquote>"
 
     result_text = header + bot_lines + footer
     await app.send_message(message.chat.id, result_text)
@@ -49,28 +49,28 @@ async def staffs(client, message):
     result_text = ""
 
     if total_owners > 0:
-        result_text += "**👑 Owner(s)**\n"
+        result_text += "<blockquote>**👑 Owner(s)**\n"
         result_text += (
             "\n".join([f"{i + 1}: {owner}" for i, owner in enumerate(owner_list)])
-            + "\n\n"
+            + "\n\n</blockquote>"
         )
     else:
-        result_text += "**👑 Owner(s)**\nNo owner found.\n\n"
+        result_text += "<blockquote>**👑 Owner(s)**\nNo owner found.\n\n</blockquote>"
 
     if total_admins > 0:
-        result_text += "**👮‍♂️ Admin(s)**\n"
+        result_text += "<blockquote>**👮‍♂️ Admin(s)**\n"
         result_text += (
             "\n".join([f"{i + 1}: {admin}" for i, admin in enumerate(admin_list)])
-            + "\n"
+            + "\n</blockquote>"
         )
     else:
-        result_text += "**👮‍♂️ Admin(s)**\nNo admins found.\n"
+        result_text += "<blockquote>**👮‍♂️ Admin(s)**\nNo admins found.\n</blockquote>"
 
     await app.send_message(message.chat.id, result_text)
 
 
 __MODULE__ = "Bots"
 __HELP__ = """
-• /bots - Get a list of bots in the group.
-• /staffs - Get a list of staff members (owners & admins) in the group.
+<blockquote>• /bots - Get a list of bots in the group.
+• /staffs - Get a list of staff members (owners & admins) in the group.</blockquote>
 """

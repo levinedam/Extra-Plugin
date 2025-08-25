@@ -3,7 +3,7 @@ import random
 import requests
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command(["wall", "wallpaper"]))
@@ -14,8 +14,8 @@ async def wall(_, message: Message):
     except IndexError:
         text = None
     if not text:
-        return await message.reply_text("`Please give some query to search.`")
-    m = await message.reply_text("sᴇᴀʀᴄʜɪɴɢ...")
+        return await message.reply_text("<blockquote>`Please give some query to search.`</blockquote>")
+    m = await message.reply_text("<blockquote>sᴇᴀʀᴄʜɪɴɢ...</blockquote>")
     try:
         url = requests.get(f"https://api.safone.dev/wall?query={text}").json()[
             "results"
@@ -23,7 +23,7 @@ async def wall(_, message: Message):
         ran = random.randint(0, 7)
         await message.reply_photo(
             photo=url[ran]["imageUrl"],
-            caption=f"🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {message.from_user.mention}",
+            caption=f"<blockquote>🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {message.from_user.mention}</blockquote>",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [InlineKeyboardButton("ʟɪɴᴋ", url=url[ran]["imageUrl"])],
@@ -33,13 +33,13 @@ async def wall(_, message: Message):
         await m.delete()
     except Exception:
         await m.edit_text(
-            f"`ᴡᴀʟʟᴘᴀᴘᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ ғᴏʀ : `{text}`",
+            f"<blockquote>`ᴡᴀʟʟᴘᴀᴘᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ ғᴏʀ : `{text}`</blockquote>",
         )
 
 
 __MODULE__ = "Wᴀʟʟ"
 __HELP__ = """
-**COMMANDS:**
+<blockquote expandable>**COMMANDS:**
 
 • /WALL - **ᴅᴏᴡɴʟᴏᴀᴅ ᴀɴᴅ sᴇɴᴅ ᴡᴀʟʟᴘᴀᴘᴇʀ.**
 
@@ -50,5 +50,5 @@ __HELP__ = """
 
 **NOTE:**
 
-- ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴀɴᴅ sᴇɴᴅ ᴡᴀʟʟᴘᴀᴘᴇʀ.
+- ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴀɴᴅ sᴇɴᴅ ᴡᴀʟʟᴘᴀᴘᴇʀ.</blockquote>
 """

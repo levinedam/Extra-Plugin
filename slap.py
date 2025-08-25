@@ -1,6 +1,6 @@
 import nekos
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command("slap"))
@@ -18,7 +18,7 @@ async def slap(client, message):
 
 
 __HELP__ = """
-Aᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs:
-- /sʟᴀᴘ: Sʟᴀᴘs sᴏᴍᴇᴏɴᴇ. Iғ ᴜsᴇᴅ ᴀs ᴀ ʀᴇᴘʟʏ, sʟᴀᴘs ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴜsᴇʀ.
+<blockquote>Aᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs:
+- /sʟᴀᴘ: Sʟᴀᴘs sᴏᴍᴇᴏɴᴇ. Iғ ᴜsᴇᴅ ᴀs ᴀ ʀᴇᴘʟʏ, sʟᴀᴘs ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴜsᴇʀ.</blockquote>
 """
 __MODULE__ = "Sʟᴀᴘ"

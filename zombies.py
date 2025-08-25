@@ -4,7 +4,7 @@ from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.errors import FloodWait
 from damMusic import app
-
+from damMusic.utils.decorators import adminsOnly
 chatQueue = []
 
 stopProcess = False

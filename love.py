@@ -1,32 +1,32 @@
 import random
 
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 def get_random_message(love_percentage):
     if love_percentage <= 30:
         return random.choice(
             [
-                "Love is in the air but needs a little spark.",
+                "<blockquote>Love is in the air but needs a little spark.</blockquote>",
                 "A good start but there's room to grow.",
-                "It's just the beginning of something beautiful.",
+                "<blockquote>It's just the beginning of something beautiful.</blockquote>",
             ]
         )
     elif love_percentage <= 70:
         return random.choice(
             [
-                "A strong connection is there. Keep nurturing it.",
-                "You've got a good chance. Work on it.",
-                "Love is blossoming, keep going.",
+                "<blockquote>A strong connection is there. Keep nurturing it.</blockquote>",
+                "<blockquote>You've got a good chance. Work on it.</blockquote>",
+                "<blockquote>Love is blossoming, keep going.</blockquote>",
             ]
         )
     else:
         return random.choice(
             [
-                "Wow! It's a match made in heaven!",
-                "Perfect match! Cherish this bond.",
-                "Destined to be together. Congratulations!",
+                "<blockquote>Wow! It's a match made in heaven!</blockquote>",
+                "<blockquote>Perfect match! Cherish this bond.</blockquote>",
+                "<blockquote>Destined to be together. Congratulations!</blockquote>",
             ]
         )
 
@@ -43,14 +43,14 @@ async def love_command(client, message):
 
         response = f"{name1}💕 + {name2}💕 = {love_percentage}%\n\n{love_message}"
     else:
-        response = "Please enter two names after /love command."
+        response = "<blockquote>Please enter two names after /love command.</blockquote>"
 
     await app.send_message(message.chat.id, response)
 
 
 __MODULE__ = "Lᴏᴠᴇ"
 __HELP__ = """
-**ʟᴏᴠᴇ ᴄᴀʟᴄᴜʟᴀᴛᴏʀ:**
+<blockquote>**ʟᴏᴠᴇ ᴄᴀʟᴄᴜʟᴀᴛᴏʀ:**
 
-• `/love [name1] [name2]`: Cᴀʟᴄᴜʟᴀᴛᴇs ᴛʜᴇ ᴘᴇʀᴄᴇɴᴛᴀɢᴇ ᴏғ ʟᴏᴠᴇ ʙᴇᴛᴡᴇᴇɴ ᴛᴡᴏ ᴘᴇᴏᴘʟᴇ.
+• `/love [name1] [name2]`: Cᴀʟᴄᴜʟᴀᴛᴇs ᴛʜᴇ ᴘᴇʀᴄᴇɴᴛᴀɢᴇ ᴏғ ʟᴏᴠᴇ ʙᴇᴛᴡᴇᴇɴ ᴛᴡᴏ ᴘᴇᴏᴘʟᴇ.</blockquote>
 """

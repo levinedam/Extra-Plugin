@@ -2,7 +2,7 @@ import re
 
 from py_yt import VideosSearch
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 async def gen_infos(url):
@@ -27,14 +27,14 @@ def is_url(url):
 async def get_thumbnail_command(client, message):
     if len(message.command) < 2:
         return await message.reply_text(
-            "ᴘʀᴏᴠɪᴅᴇ ᴍᴇ ᴀ ʏᴛ ᴠɪᴅᴇᴏᴜʀʟ ᴀғᴛᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ɢᴇᴛ ᴛʜᴜᴍʙɴᴀɪʟ"
+            "<blockquote>ᴘʀᴏᴠɪᴅᴇ ᴍᴇ ᴀ ʏᴛ ᴠɪᴅᴇᴏᴜʀʟ ᴀғᴛᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ɢᴇᴛ ᴛʜᴜᴍʙɴᴀɪʟ</blockquote>"
         )
     try:
-        a = await message.reply_text("ᴘʀᴏᴄᴇssɪɴɢ...")
+        a = await message.reply_text("<blockquote>ᴘʀᴏᴄᴇssɪɴɢ...</blockquote>")
         url = message.text.split(" ")[1]
         i, video_id = is_url(url)
         if not i:
-            return await a.edit("ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ʏᴏᴜᴛᴜʙᴇ ʟɪɴᴋ.")
+            return await a.edit("<blockquote>ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ʏᴏᴜᴛᴜʙᴇ ʟɪɴᴋ.</blockquote>")
 
         title, thumb = await gen_infos(url)
         caption = f"<b>[{title}](https://t.me/{app.username}?start=info_{video_id})</b>"
@@ -45,7 +45,7 @@ async def get_thumbnail_command(client, message):
 
 
 __HELP__ = """
-**ʏᴏᴜᴛᴜʙᴇ ᴛʜᴜᴍʙɴᴀɪʟ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs**
+<blockquote expandable>**ʏᴏᴜᴛᴜʙᴇ ᴛʜᴜᴍʙɴᴀɪʟ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs**
 
 ᴜsᴇ ᴛʜᴇsᴇ ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ɢᴇᴛ ᴛʜᴇ ᴛʜᴜᴍʙɴᴀɪʟ ғʀᴏᴍ ᴀ ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ:
 
@@ -62,7 +62,7 @@ __HELP__ = """
 - `/getthumb https://www.youtube.com/watch?v=Tl4bQBfOtbg`
 
 **ɴᴏᴛᴇ:**
-ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ʏᴏᴜᴛᴜʙᴇ ᴜʀʟ ᴀғᴛᴇʀ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ᴛʜᴜᴍʙɴᴀɪʟ.
+ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ʏᴏᴜᴛᴜʙᴇ ᴜʀʟ ᴀғᴛᴇʀ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ᴛʜᴜᴍʙɴᴀɪʟ.</blockquote>
 """
 
 __MODULE__ = "Yᴛʜᴜᴍʙ"

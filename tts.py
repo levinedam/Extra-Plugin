@@ -2,14 +2,14 @@ import io
 
 from gtts import gTTS
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command("tts"))
 async def text_to_speech(client, message):
     if len(message.command) < 2:
         return await message.reply_text(
-            "Please provide some text to convert to speech."
+            "<blockquote>Please provide some text to convert to speech.</blockquote>"
         )
 
     text = message.text.split(None, 1)[1]
@@ -24,17 +24,17 @@ async def text_to_speech(client, message):
 
 
 __HELP__ = """
-**ᴛᴇxᴛ ᴛᴏ sᴘᴇᴇᴄʜ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅ**
+<blockquote expandable>**ᴛᴇxᴛ ᴛᴏ sᴘᴇᴇᴄʜ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅ**
 
 ᴜsᴇ ᴛʜᴇ `/tts` ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴛᴇxᴛ ɪɴᴛᴏ sᴘᴇᴇᴄʜ.
 
-- `/tts <ᴛᴇxᴛ>`: ᴄᴏɴᴠᴇʀᴛs ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ ᴛᴏ sᴘᴇᴇᴄʜ ɪɴ ʜɪɴᴅɪ.
+- `/tts <ᴛᴇxᴛ>`: ᴄᴏɴᴠᴇʀᴛs ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ.
 
 **ᴇxᴀᴍᴘʟᴇ:**
 - `/tts Namaste Duniya`
 
 **ɴᴏᴛᴇ:**
-ᴍᴀᴋᴇ sᴜʀᴇ ᴛᴏ ᴘʀᴏᴠɪᴅᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴀғᴛᴇʀ ᴛʜᴇ `/tts` ᴄᴏᴍᴍᴀɴᴅ.
+ᴍᴀᴋᴇ sᴜʀᴇ ᴛᴏ ᴘʀᴏᴠɪᴅᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴀғᴛᴇʀ ᴛʜᴇ `/tts` ᴄᴏᴍᴍᴀɴᴅ.</blockquote>
 """
 
 __MODULE__ = "Tᴛs"

@@ -1,6 +1,6 @@
 import requests
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command(["FAKE", "fake"]))
@@ -27,7 +27,7 @@ async def fkadress(_, message):
         gender = fk["gender"]
 
         fkinfo = f"""
-**ɴᴀᴍᴇ** ⇢ `{name}`
+<blockquote expandable>**ɴᴀᴍᴇ** ⇢ `{name}`
 **ɢᴇɴᴅᴇʀ** ⇢ `{gender}`
 **ᴀᴅᴅʀᴇss** ⇢ `{address}`
 **ᴄᴏᴜɴᴛʀʏ** ⇢ `{country}`
@@ -36,16 +36,16 @@ async def fkadress(_, message):
 **sᴛᴀᴛᴇ** ⇢ `{state}`
 **ᴘᴏsᴛᴀʟ** ⇢ `{postal}`
 **ᴇᴍᴀɪʟ** ⇢ `{email}`
-**ᴘʜᴏɴᴇ** ⇢ `{phone}`
+**ᴘʜᴏɴᴇ** ⇢ `{phone}`</blockquote>
 
         """
 
         await message.reply_photo(photo=picture, caption=fkinfo)
     else:
-        await message.reply_text("ᴏᴏᴘs ɴᴏᴛ ғᴏᴜɴᴅ ᴀɴʏ ᴀᴅᴅʀᴇss.\nᴛʀʏ ᴀɢᴀɪɴ")
+        await message.reply_text("<blockquote>ᴏᴏᴘs ɴᴏᴛ ғᴏᴜɴᴅ ᴀɴʏ ᴀᴅᴅʀᴇss.\nᴛʀʏ ᴀɢᴀɪɴ</blockquote>")
 
 
 __MODULE__ = "Fᴀᴋᴇ"
 __HELP__ = """
 
-/fake [ᴄᴏᴜɴᴛʀʏ ɴᴀᴍᴇ ] - ᴛᴏ ɢᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴅʀᴇss"""
+<blockquote>/fake [ᴄᴏᴜɴᴛʀʏ ɴᴀᴍᴇ ] - ᴛᴏ ɢᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴅʀᴇss</blockquote>"""

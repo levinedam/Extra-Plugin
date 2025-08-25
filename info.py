@@ -2,9 +2,9 @@ import os
 
 from pyrogram import enums, filters
 from pyrogram.types import Message
-from YukkiMusic import app
-from YukkiMusic.misc import SUDOERS
-from YukkiMusic.utils.database import is_gbanned_user
+from damMusic import app
+from damMusic.misc import SUDOERS
+from damMusic.utils.database import is_gbanned_user
 
 n = "\n"
 w = " "
@@ -59,7 +59,7 @@ async def userstatus(user_id):
         elif x == enums.UserStatus.ONLINE:
             return "Online."
     except BaseException:
-        return "**sᴏᴍᴇᴛʜɪɴɢ ᴡʀᴏɴɢ ʜᴀᴘᴘᴇɴᴇᴅ !**"
+        return "<blockquote>**sᴏᴍᴇᴛʜɪɴɢ ᴡʀᴏɴɢ ʜᴀᴘᴘᴇɴᴇᴅ !**</blockquote>"
 
 
 async def get_user_info(user, already=False):
@@ -96,7 +96,7 @@ async def get_chat_info(chat):
     link = f"[Link](t.me/{username})" if username else "Null"
     photo_id = chat.photo.big_file_id if chat.photo else None
     info = f"""
-❅─────✧❅✦❅✧─────❅
+<blockquote expandable>❅─────✧❅✦❅✧─────❅
              ✦ ᴄʜᴀᴛ ɪɴғᴏ ✦
 
 ➻ ᴄʜᴀᴛ ɪᴅ ‣ {chat.id}
@@ -114,7 +114,7 @@ async def get_chat_info(chat):
 ➻ ʟɪɴᴋ ‣ {link}
 
 
-❅─────✧❅✦❅✧─────❅"""
+❅─────✧❅✦❅✧─────❅</blockquote>"""
 
     return info, photo_id
 
@@ -133,10 +133,10 @@ async def info_func(_, message: Message):
             user = user_input
         else:
             return await message.reply_text(
-                "ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴜsᴇʀ's ᴜsᴇʀ ɪᴅ ᴏʀ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜsᴇʀ ᴛᴏ ɢᴇᴛ ɪɴғᴏ"
+                "<blockquote>ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴜsᴇʀ's ᴜsᴇʀ ɪᴅ ᴏʀ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜsᴇʀ ᴛᴏ ɢᴇᴛ ɪɴғᴏ</blockquote>"
             )
 
-    m = await message.reply_text("ᴘʀᴏᴄᴇssɪɴɢ...")
+    m = await message.reply_text("<blockquote>ᴘʀᴏᴄᴇssɪɴɢ...</blockquote>")
 
     try:
         info_caption, photo_id = await get_user_info(user)
@@ -158,11 +158,11 @@ async def chat_info_func(_, message: Message):
     if len(splited) == 1:
         chat = message.chat.id
         if chat == message.from_user.id:
-            return await message.reply_text("**Usage:**/chat_info [USERNAME|ID]")
+            return await message.reply_text("<blockquote>**Usage:**/chat_info [USERNAME|ID]</blockquote>")
     else:
         chat = splited[1]
     try:
-        m = await message.reply_text("Processing")
+        m = await message.reply_text("<blockquote>Processing...</blockquote>")
 
         info_caption, photo_id = await get_chat_info(chat)
         if not photo_id:
@@ -179,8 +179,8 @@ async def chat_info_func(_, message: Message):
 
 __MODULE__ = "Iɴғᴏ"
 __HELP__ = """
-**ᴜsᴇʀ & ᴄʜᴀᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ:**
+<blockquote expandable>**ᴜsᴇʀ & ᴄʜᴀᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ:**
 
 • `/info`: Gᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴛʜᴇ ᴜsᴇʀ. Usᴇʀɴᴀᴍᴇ, ID, ᴀɴᴅ ᴍᴏʀᴇ.
-• `/chatinfo [ᴜsᴇʀɴᴀᴍᴇ|ɪᴅ]`: Gᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴛʜᴇ ᴄʜᴀᴛ. ᴍᴇᴍʙᴇʀ ᴄᴏᴜɴᴛ, ɪs ᴠᴇʀɪғɪᴇᴅ, ɪɴᴠɪᴛᴇ ʟɪɴᴋ, ᴀɴᴅ ᴍᴏʀᴇ.
+• `/chatinfo [ᴜsᴇʀɴᴀᴍᴇ|ɪᴅ]`: Gᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴛʜᴇ ᴄʜᴀᴛ. ᴍᴇᴍʙᴇʀ ᴄᴏᴜɴᴛ, ɪs ᴠᴇʀɪғɪᴇᴅ, ɪɴᴠɪᴛᴇ ʟɪɴᴋ, ᴀɴᴅ ᴍᴏʀᴇ.</blockquote>
 """

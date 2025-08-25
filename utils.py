@@ -1,3 +1,4 @@
+''''
 import logging
 import traceback
 from functools import wraps
@@ -7,9 +8,9 @@ from config import LOG_GROUP_ID
 from pyrogram.errors import ChatWriteForbidden
 from pyrogram.types import Message
 from TheApi import Client
-from YukkiMusic import app
-from YukkiMusic.core.mongo import mongodb
-from YukkiMusic.misc import SUDOERS
+from damMusic import app
+from damMusic.core.mongo import mongodb
+from damMusic.misc import SUDOERS
 
 TheApi = Client()
 coupledb = {}
@@ -324,3 +325,5 @@ def extract_urls(reply_markup):
                         else f"button{i * len(row) + j + 1}"
                     )
                     urls.append((f"{name}", button.text, button.url))
+
+''''

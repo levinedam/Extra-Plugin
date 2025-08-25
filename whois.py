@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.errors import PeerIdInvalid
 from pyrogram.types import Message, User
-from YukkiMusic import app
+from damMusic import app
 
 
 def ReplyCheck(message: Message):
@@ -85,7 +85,7 @@ async def whois(client, message):
 
 
 __HELP__ = """
-**ᴄᴏᴍᴍᴀɴᴅ:**
+<blockquote expandable>**ᴄᴏᴍᴍᴀɴᴅ:**
 
 • /whois - **ᴄʜᴇᴄᴋ ᴜsᴇʀ ɪɴғᴏʀᴍᴀᴛɪᴏɴ.**
 
@@ -97,7 +97,7 @@ __HELP__ = """
 **ɴᴏᴛᴇ:**
 
 - ᴛʜᴇ /whois ᴄᴏᴍᴍᴀɴᴅ ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴛᴏ ʀᴇᴛʀɪᴇᴠᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ᴜsᴇʀ ɪɴ ᴛʜᴇ ᴄʜᴀᴛ.
-- ᴛʜᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɪɴᴄʟᴜᴅᴇs ᴜsᴇʀ ɪᴅ, ғɪʀsᴛ ɴᴀᴍᴇ, ʟᴀsᴛ ɴᴀᴍᴇ, ᴜsᴇʀɴᴀᴍᴇ, ᴀɴᴅ ʟᴀsᴛ sᴇᴇɴ sᴛᴀᴛᴜs.
+- ᴛʜᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ɪɴᴄʟᴜᴅᴇs ᴜsᴇʀ ɪᴅ, ғɪʀsᴛ ɴᴀᴍᴇ, ʟᴀsᴛ ɴᴀᴍᴇ, ᴜsᴇʀɴᴀᴍᴇ, ᴀɴᴅ ʟᴀsᴛ sᴇᴇɴ sᴛᴀᴛᴜs.</blockquote>
 """
 
 __MODULE__ = "Wʜᴏɪs"

@@ -11,13 +11,10 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
 )
 from damMusic import app
-from damMusic import utils
 from damMusic.misc import SUDOERS
 from damMusic.utils.database import is_gbanned_user
 from damMusic.utils.functions import check_format, extract_text_and_keyb
 from damMusic.utils.keyboard import ikb
-
-extract_urls = utils.extract_urls
 
 
 async def handle_new_member(member, chat):

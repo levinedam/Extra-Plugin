@@ -4,7 +4,7 @@ import time
 import requests
 from pyrogram import filters
 from pyrogram.enums import ChatAction, PollType
-from YukkiMusic import app
+from damMusic import app
 
 last_command_time = {}
 
@@ -16,7 +16,7 @@ async def quiz(client, message):
 
     if user_id in last_command_time and current_time - last_command_time[user_id] < 5:
         await message.reply_text(
-            "Pʟᴇᴀsᴇ ᴡᴀɪᴛ 𝟻 sᴇᴄᴏɴᴅs ʙᴇғᴏʀᴇ ᴜsɪɴɢ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴀɢᴀɪɴ."
+            "<blockquote>Pʟᴇᴀsᴇ ᴡᴀɪᴛ 𝟻 sᴇᴄᴏɴᴅs ʙᴇғᴏʀᴇ ᴜsɪɴɢ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴀɢᴀɪɴ.</blockquote>"
         )
         return
 
@@ -48,4 +48,4 @@ async def quiz(client, message):
 
 
 __MODULE__ = "Qᴜɪᴢ"
-__HELP__ = " /quiz - ᴛᴏ ɢᴇᴛ ᴀɴ ʀᴀɴᴅᴏᴍ ǫᴜɪᴢ"
+__HELP__ = " <blockquote>/quiz - ᴛᴏ ɢᴇᴛ ᴀɴ ʀᴀɴᴅᴏᴍ ǫᴜɪᴢ</blockquote>"

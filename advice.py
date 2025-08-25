@@ -1,5 +1,5 @@
 from pyrogram import filters
-from YukkiMusic import app
+from damMusic import app
 
 
 @app.on_message(filters.command("advice"))
@@ -11,4 +11,4 @@ async def advice(_, message):
 
 __MODULE__ = "Aᴅᴠɪᴄᴇ"
 __HELP__ = """
-/advice - Gᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ"""
+<blockquote>/advice - Gᴇᴛ ʀᴀɴᴅᴏᴍ ᴀᴅᴠɪᴄᴇ</blockquote>"""
